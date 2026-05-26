@@ -9,15 +9,6 @@ require_once "../config.php";
 // chargement du modèle de la table guestbook
 require_once URL_BASE . "/model/guestbookModel.php";
 
-/*
- * Front Controller de la gestion du livre d'or
- */
-
-
-    //  on charge la page d'accueil
-    include URL_BASE."/view/guestbookView.php";
-
-
 
 /*
  * Connexion à la base de données en utilisant PDO
@@ -82,6 +73,17 @@ try{
 
 // Appel de la vue
 
-include URL_BASE . "/view/guestbookView.php";
+// include URL_BASE . "/view/guestbookView.php";
+
+/*
+ * Front Controller de la gestion du livre d'or
+ */
+
+
+    //  on charge la page d'accueil
+    include URL_BASE."/view/guestbookView.php";
+
+
+
 
 // fermeture de la connexion (bonne pratique)

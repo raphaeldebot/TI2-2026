@@ -48,6 +48,7 @@ echo '<p>$_POST</p>';
 var_dump($_POST);
 echo '<p>$_GET</p>';
 var_dump($_GET);
+var_dump($connectDB);
 ?>
 
 <script src="js/validation.js"></script>
