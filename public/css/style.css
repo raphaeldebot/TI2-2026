@@ -1,0 +1,194 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Georgia, "Times New Roman", serif;
+    text-align: center;
+    color: #f5fff7;
+    background:
+        radial-gradient(circle at top right, rgba(0, 255, 60, 0.45), transparent 28%),
+        linear-gradient(135deg, #030604 0%, #061109 55%, #000000 100%);
+}
+
+
+
+
+
+
+/* LAYOUT GENERAL */
+
+
+
+
+
+
+/* COMMENTAIRES */
+.success-message {
+    max-width: 620px;
+    margin: 0 auto 24px;
+    padding: 14px 18px;
+    border-radius: 18px;
+    color: #d9ffe1;
+    background: rgba(0, 255, 60, 0.12);
+    border: 1px solid rgba(0, 255, 60, 0.45);
+}
+
+.comments-list {
+    display: grid;
+    gap: 20px;
+    margin-top: 26px;
+}
+
+.commentaire-card {
+    max-width: 760px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 24px;
+    text-align: left;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.25);
+}
+
+.commentaire-card h3 {
+    margin: 0 0 12px;
+    color: #ffffff;
+    font-size: 1.35rem;
+}
+
+.comment-meta {
+    margin: 0 0 14px;
+    color: #b7c8bd;
+    font-size: 0.95rem;
+}
+
+.comment-text {
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* FORMULAIRE */
+.form-card {
+    max-width: 580px;
+    margin: 0 auto;
+    padding: 30px;
+    text-align: left;
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+}
+
+.form-card h2 {
+    text-align: center;
+    margin-top: 0;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.38);
+    color: #f5fff7;
+    font: inherit;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: rgba(0, 255, 60, 0.75);
+    box-shadow: 0 0 0 3px rgba(0, 255, 60, 0.15);
+}
+
+textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.button-link,
+button {
+    display: inline-block;
+    padding: 11px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 255, 60, 0.55);
+    background: rgba(0, 255, 60, 0.13);
+    color: #f5fff7;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.button-link:hover,
+button:hover {
+    background: rgba(0, 255, 60, 0.25);
+}
+
+.field-error{
+    color: red;
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 850px) {
+    .container {
+        grid-template-columns: 1fr;
+        max-width: 420px;
+    }
+
+    .card {
+        min-height: auto;
+    }
+
+    .card img {
+        height: 280px;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .site-header {
+        padding: 14px 12px;
+    }
+
+    .nav {
+        gap: 8px;
+    }
+
+    .nav a {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    main {
+        width: 94%;
+        padding-top: 28px;
+    }
+
+    .form-card,
+    .commentaire-card,
+    .comment-summary {
+        padding: 20px;
+    }
+
+    .commentaire-card {
+        text-align: center;
+    }
+}

@@ -46,7 +46,7 @@ if(isset($_POST['firstname'],$_POST['lastname'],$_POST['usermail'],$_POST['phone
 
 }
 if ($addGuestbook) {
-        header("Location: ./?&merci=1");
+        header("Location: ./?merci=1");
         exit;
     } 
 

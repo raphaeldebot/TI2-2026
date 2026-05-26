@@ -11,18 +11,22 @@
     <title>TI2 | Livre d'or</title>
     <link rel="icon" type="image/png" href="img/favicon.png">
     <link rel="stylesheet" href="css/style.css">
+<script src="js/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-<h1>TI2 | Livre d'or</h1>
-<?php if (isset($_GET['merci'])): ?>
+    <header>
+        <h1>TI2 | Livre d'or</h1>
+    
+    <?php if (isset($_GET['merci'])): ?>
         <p class="success-message">
             Merci, votre commentaire a bien été ajouté.
         </p>
+        <?php else :?>
+        <p> Laissez une trace de votre passage !!</p>
     <?php endif; ?>
+    </header>
 <!-- Formulaire d'ajout d'un message -->
-<form id="commentForm" class="form-card" method="POST" action="" novalidate>
-        <h2>Votre avis sur ma passion</h2>
-
+<form id="messageForm" class="form-card" method="POST" action="" novalidate>
         <div class="form-group">
             <label for="firstname">Prénom</label>
             <input 
@@ -50,7 +54,7 @@
                 name="usermail" 
                 id="usermail"
             >
-            <small class="field-error" id="titleError"></small>
+            <small class="field-error" id="usermailError"></small>
         </div>
 
         <div class="form-group">
@@ -60,7 +64,7 @@
                 name="postcode" 
                 id="postcode"
             >
-            <small class="field-error" id="textCommentError"></small>
+            <small class="field-error" id="postcodeError"></small>
         </div>
 
         <div class="form-group">
@@ -70,7 +74,7 @@
                 name="phone" 
                 id="phone"
             >
-            <small class="field-error" id="textCommentError"></small>
+            <small class="field-error" id="phoneError"></small>
         </div>
 
         <div class="form-group">
@@ -79,7 +83,7 @@
                 name="message" 
                 id="message"
             ></textarea>
-            <small class="field-error" id="textCommentError"></small>
+            <small class="field-error" id="messageError"></small>
         </div>
 
         <button type="submit">Envoyer le message</button>
@@ -117,21 +121,7 @@
             <?php endforeach; ?>
             </ul>
     <?php endif; ?>
-etc ...
-<!-- Pagination (BONUS) -->
-
 <?php echo $pagination ?>
-<?php
-// À commenter quand on a fini de tester
-echo "<h3>Nos var_dump() pour le débugage</h3>";
-echo '<p>$_POST</p>';
-var_dump($_POST);
-echo '<p>$_GET</p>';
-var_dump($_GET);
-var_dump($connectDB);
-var_dump($retour);
-?>
-
 <script src="js/validation.js"></script>
 </body>
 </html>
