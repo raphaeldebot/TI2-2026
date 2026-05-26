@@ -84,13 +84,20 @@
 
         <button type="submit">Envoyer le message</button>
     </form>
-<!-- Si pas de message -->
-<h3>Pas encore de message</h3>
-<!-- Si 1 message -->
-<h3>Il y a 1 message</h3>
-<!-- Si plusieurs messages -->
-<h3>Il y a X messages</h3>
 
+<?php if ($countMessages === 0): ?>
+
+        <h3>Pas encore de commentaire</h3>
+
+    <?php elseif ($countMessages === 1): ?>
+
+        <h3>Il y a 1 commentaire</h3>
+
+    <?php else: ?>
+
+        <h3>Il y a <?= $countMessages ?> commentaires</h3>
+
+    <?php endif; ?>
 <!-- Pagination (BONUS) -->
 
 <!-- Liste des messages -->

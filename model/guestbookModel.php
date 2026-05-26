@@ -123,7 +123,16 @@ function getAllGuestbook(PDO $db): array
     // si la requête a réussi,
     // bonne pratique, fermez le curseur
     // renvoyer le tableau de(s) message(s)
-    return [];
+
+    $stmt=$db->query("SELECT * FROM `guestbook` ORDER BY `post_date` DESC");
+// un tableau avec les results
+    $result= $stmt-> fetchAll(PDO::FETCH_ASSOC);
+
+// Bonne pratique 
+    $stmt->closeCursor();
+// retour du tableau
+    return $result;
+
 }
 
 /**************************
@@ -138,10 +147,11 @@ function getAllGuestbook(PDO $db): array
  */
 function getNbTotalGuestbook(PDO $db): int
 {
-
+    $stmt = $db->query("SELECT COUNT(*) AS count FROM guestbook");
+    return (int) $stmt->fetch()['count'];
     // bonne pratique, fermez le curseur,
     // renvoyez le nombre total de messages
-    return 0;
+
 
 }
 // SELECTION de messages dans le livre d'or par ordre de date croissante

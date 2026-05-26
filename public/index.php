@@ -62,6 +62,10 @@ if ($addGuestbook) {
 
 // on appelle la fonction de récupération de la DB (getAllGuestbook())
 
+
+$countMessages = getNbTotalGuestbook($connectDB);
+
+
 /*********************
  * Ou Bonus Pagination
  *********************/
