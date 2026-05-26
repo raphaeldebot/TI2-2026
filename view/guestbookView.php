@@ -14,6 +14,11 @@
 </head>
 <body>
 <h1>TI2 | Livre d'or</h1>
+<?php if (isset($_GET['merci'])): ?>
+        <p class="success-message">
+            Merci, votre commentaire a bien été ajouté.
+        </p>
+    <?php endif; ?>
 <!-- Formulaire d'ajout d'un message -->
 <form id="commentForm" class="form-card" method="POST" action="" novalidate>
         <h2>Votre avis sur ma passion</h2>

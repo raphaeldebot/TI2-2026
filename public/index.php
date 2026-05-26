@@ -39,12 +39,16 @@ try{
  * Si le formulaire a été soumis
  */
 
-
+$addGuestbook = false;
 if(isset($_POST['firstname'],$_POST['lastname'],$_POST['usermail'],$_POST['phone'],$_POST['postcode'],$_POST['message'])){
-    // envoi de nos var nécessaires à l'insertion 
-    $addGuestbook=addGuestbook($connectDB,$_POST['firstname'],$_POST['lastname'],$_POST['usermail'],$_POST['phone'],$_POST['postcode'],$_POST['message']);
-}
 // on appelle la fonction d'insertion dans la DB (addGuestbook())
+    $addGuestbook=addGuestbook($connectDB,$_POST['firstname'],$_POST['lastname'],$_POST['usermail'],$_POST['phone'],$_POST['postcode'],$_POST['message']);
+
+}
+if ($addGuestbook) {
+        header("Location: ./?&merci=1");
+        exit;
+    } 
 
 // si l'insertion a réussi
 
