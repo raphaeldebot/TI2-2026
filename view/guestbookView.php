@@ -112,6 +112,7 @@ var_dump($_POST);
 echo '<p>$_GET</p>';
 var_dump($_GET);
 var_dump($connectDB);
+var_dump($retour);
 ?>
 
 <script src="js/validation.js"></script>

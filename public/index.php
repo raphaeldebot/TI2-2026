@@ -39,6 +39,11 @@ try{
  * Si le formulaire a été soumis
  */
 
+
+if(isset($_POST['firstname'],$_POST['lastname'],$_POST['usermail'],$_POST['phone'],$_POST['postcode'],$_POST['message'])){
+    // envoi de nos var nécessaires à l'insertion 
+    $addGuestbook=addGuestbook($connectDB,$_POST['firstname'],$_POST['lastname'],$_POST['usermail'],$_POST['phone'],$_POST['postcode'],$_POST['message']);
+}
 // on appelle la fonction d'insertion dans la DB (addGuestbook())
 
 // si l'insertion a réussi

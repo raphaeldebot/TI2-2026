@@ -40,26 +40,25 @@ function addGuestbook(PDO $db,
 
     // si pas de données complètes ou ne correspondant pas à nos attentes, on renvoie false
     // vérification É-mail
-    if($usermail===false                ||
-    strlen($usermail)       >   120     ||
+    if
+      ($usermail===false                ||
+    strlen($usermail)       >   200     ||
     // vérification prénom
     empty($firstname)                   ||
-    strlen($firstname)      <   3       ||
-    strlen($firstname)      >   20      ||
+    strlen($firstname)      >  100      ||
     // vérification nom
     empty($lastname)                    ||
-    strlen($lastname)       <   3       ||
-    strlen($lastname)       >   20      ||
+    strlen($lastname)       >   100     ||
     // vérification numéro de téléphone
     empty($phone)                       ||
-    strlen($phone)          ==  8       ||
+    strlen($phone)          !==  10     ||
     // vérification code postal
     empty($postcode)                    ||
-    strlen($postcode)       ==  4       ||
+    strlen($postcode)       !==  4      ||
     // vérification message
     empty($message)                     ||
     strlen($message)        <   5       ||
-    strlen($message)        >   300
+    strlen($message)        >   500
 
 
     ) return false;
@@ -68,8 +67,21 @@ function addGuestbook(PDO $db,
     // requête préparée obligatoire !
 
     $prepare = $db->prepare("
-    INSERT INTO `commentaire`(`usermail`,`firstname`,`lastname`,`phone`,`postcode`,`message`)
-    VALUES(:usermail,:firstname,:lastname,:phone,:postcode,:message,); 
+    INSERT INTO `guestbook`(    
+                            `usermail`,
+                            `firstname`,
+                            `lastname`,
+                            `phone`,
+                            `postcode`,
+                            `message`
+                            )
+    VALUES( 
+            :usermail,
+            :firstname,
+            :lastname,
+            :phone,
+            :postcode,
+            :message); 
     ");
 
     $prepare->bindValue(':usermail',$usermail);
