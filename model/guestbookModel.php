@@ -67,16 +67,28 @@ function addGuestbook(PDO $db,
 
     // requête préparée obligatoire !
 
+    $prepare = $db->prepare("
+    INSERT INTO `commentaire`(`usermail`,`firstname`,`lastname`,`phone`,`postcode`,`message`)
+    VALUES(:usermail,:firstname,:lastname,:phone,:postcode,:message,); 
+    ");
+    # on met nos val dans 
+    $prepare->bindValue(':usermail',$usermail);
+    $prepare->bindValue(':firstname',$firstname);
+    $prepare->bindValue(':lastname',$lastname);
+    $prepare->bindValue(':phone',$phone);
+    $prepare->bindValue(':postcode',$postcode);
+    $prepare->bindValue(':message',$message);
 
-    // si l'insertion a réussi
+
+    // si l'insertion a réussi on renvoie true. sinon, on renvoie false.
 
 
-    // on renvoie true
+    // 
 
 
-    // sinon, on renvoie false
+    // 
 
-    
+
 
 }
 
