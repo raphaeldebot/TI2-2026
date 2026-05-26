@@ -15,7 +15,70 @@
 <body>
 <h1>TI2 | Livre d'or</h1>
 <!-- Formulaire d'ajout d'un message -->
-<h2>Ici le formulaire</h2>
+<form id="commentForm" class="form-card" method="POST" action="" novalidate>
+        <h2>Votre avis sur ma passion</h2>
+
+        <div class="form-group">
+            <label for="firstname">Prénom</label>
+            <input 
+                type="texte" 
+                name="firstname" 
+                id="firstname" 
+            >
+            <small class="field-error" id="firstnameError"></small>
+        </div>
+
+        <div class="form-group">
+            <label for="lastname">Nom</label>
+            <input 
+                type="text" 
+                name="lastname" 
+                id="lastname" 
+            >
+            <small class="field-error" id="lastnameError"></small>
+        </div>
+
+        <div class="form-group">
+            <label for="usermail">É-mail</label>
+            <input 
+                type="texte" 
+                name="usermail" 
+                id="usermail"
+            >
+            <small class="field-error" id="titleError"></small>
+        </div>
+
+        <div class="form-group">
+            <label for="postcode">Code Postal</label>
+            <input
+                type="texte"
+                name="postcode" 
+                id="postcode"
+            >
+            <small class="field-error" id="textCommentError"></small>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Télephone</label>
+            <input
+                type="texte"
+                name="phone" 
+                id="phone"
+            >
+            <small class="field-error" id="textCommentError"></small>
+        </div>
+
+        <div class="form-group">
+            <label for="message">Message</label>
+            <textarea 
+                name="message" 
+                id="message"
+            ></textarea>
+            <small class="field-error" id="textCommentError"></small>
+        </div>
+
+        <button type="submit">Envoyer le message</button>
+    </form>
 <!-- Si pas de message -->
 <h3>Pas encore de message</h3>
 <!-- Si 1 message -->
