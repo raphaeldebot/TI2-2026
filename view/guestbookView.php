@@ -25,6 +25,10 @@
         <p> Laissez une trace de votre passage !!</p>
     <?php endif; ?>
     </header>
+
+    <div>
+        <img src="img/waifbook.png" alt="">
+    </div>
 <!-- Formulaire d'ajout d'un message -->
 <form id="messageForm" class="form-card" method="POST" action="" novalidate>
         <div class="form-group">
@@ -108,7 +112,12 @@
         <ul class="comments-list">
             <?php foreach ($messages as $message): ?>
                 <li class="commentaire-card">
-                    <p><strong><?= htmlspecialchars($message['firstname']) ?></strong> <strong><?= htmlspecialchars($message['lastname']) ?></strong> </h3>
+                    <p class="comment-name"><strong><?= htmlspecialchars($message['firstname']) ?></strong> <strong><?= htmlspecialchars($message['lastname']) ?></strong> </h3>
+
+                    <p class="comment-usermail">
+                        <p><em><?= htmlspecialchars($message['usermail']) ?></em></p>
+                    </p>
+
 
                     <p class="comment-meta">
                         <p><em><?= htmlspecialchars($message['datemessage']) ?></em></p>
@@ -121,7 +130,8 @@
             <?php endforeach; ?>
             </ul>
     <?php endif; ?>
-<?php echo $pagination ?>
+    <p class="pagination">
+<?php echo $pagination ?></p>
 <script src="js/validation.js"></script>
 </body>
 </html>
