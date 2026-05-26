@@ -124,7 +124,7 @@ function getAllGuestbook(PDO $db): array
     // bonne pratique, fermez le curseur
     // renvoyer le tableau de(s) message(s)
 
-    $stmt=$db->query("SELECT * FROM `guestbook` ORDER BY `post_date` DESC");
+    $stmt=$db->query("SELECT * FROM `guestbook` ORDER BY `datemessage` DESC");
 // un tableau avec les results
     $result= $stmt-> fetchAll(PDO::FETCH_ASSOC);
 

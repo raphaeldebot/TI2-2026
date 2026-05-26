@@ -62,7 +62,7 @@ if ($addGuestbook) {
 
 // on appelle la fonction de récupération de la DB (getAllGuestbook())
 
-
+$messages = getAllGuestbook($connectDB);
 $countMessages = getNbTotalGuestbook($connectDB);
 
 

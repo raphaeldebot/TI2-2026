@@ -114,6 +114,24 @@
         <p>message</p>
     </li>
 </ul>
+
+<?php if (!empty($messages)): ?>
+        <ul class="comments-list">
+            <?php foreach ($messages as $message): ?>
+                <li class="commentaire-card">
+                    <p><strong><?= htmlspecialchars($message['firstname']) ?></strong> <strong><?= htmlspecialchars($message['lastname']) ?></strong> </h3>
+
+                    <p class="comment-meta">
+                        <p><em><?= htmlspecialchars($message['datemessage']) ?></em></p>
+                    </p>
+
+                    <p class="comment-text">
+                        <?= htmlspecialchars($message['message']) ?>
+                    </p>
+            </li>
+            <?php endforeach; ?>
+            </ul>
+    <?php endif; ?>
 etc ...
 <!-- Pagination (BONUS) -->
 <?php
