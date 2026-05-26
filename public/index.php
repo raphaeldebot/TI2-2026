@@ -26,6 +26,23 @@ require_once URL_BASE . "/model/guestbookModel.php";
  * Activez le mode d'erreur de PDO à Exception et
  * le mode fetch à tableau associatif
  */
+try{
+    $connectDB = new PDO(
+        dsn: MARIA_DSN,
+        username: DB_LOGIN, 
+        password: DB_PWD,
+        options:[
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            ]
+        );
+
+        $connectDB->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+
+}catch(Exception $e){
+    // arrêt et affichage de l'erreur (en dev)
+    die($e->getMessage());
+}
+
 
 /*
  * Si le formulaire a été soumis
