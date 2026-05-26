@@ -100,21 +100,6 @@
     <?php endif; ?>
 <!-- Pagination (BONUS) -->
 
-<!-- Liste des messages -->
-<ul>
-    <li>
-        <p><strong>firstname lastname</strong></p>
-        <p><em>datemessage</em></p>
-        <p>message</p>
-    </li>
-    <!-- Autres messages -->
-    <li>
-        <p><strong>firstname lastname</strong></p>
-        <p><em>datemessage</em></p>
-        <p>message</p>
-    </li>
-</ul>
-
 <?php if (!empty($messages)): ?>
         <ul class="comments-list">
             <?php foreach ($messages as $message): ?>
@@ -134,6 +119,8 @@
     <?php endif; ?>
 etc ...
 <!-- Pagination (BONUS) -->
+
+<?php echo $pagination ?>
 <?php
 // À commenter quand on a fini de tester
 echo "<h3>Nos var_dump() pour le débugage</h3>";

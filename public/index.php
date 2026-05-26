@@ -62,9 +62,18 @@ if ($addGuestbook) {
 
 // on appelle la fonction de récupération de la DB (getAllGuestbook())
 
-$messages = getAllGuestbook($connectDB);
+//$messages = getAllGuestbook($connectDB);
 $countMessages = getNbTotalGuestbook($connectDB);
 
+if(isset($_GET[PAGINATION_GET])){
+        $page = (int) $_GET[PAGINATION_GET];
+    }else{
+        $page = 1;
+    }
+
+    // récupération de $comments en utilisant la fonction de pagination
+    $messages = getGuestbookPagination($connectDB,$page,PAGINATION_NB);
+$pagination = pagination($countMessages,'./',PAGINATION_GET,$page,PAGINATION_NB);   
 
 /*********************
  * Ou Bonus Pagination

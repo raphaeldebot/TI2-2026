@@ -168,13 +168,26 @@ function getNbTotalGuestbook(PDO $db): int
  */
 function getGuestbookPagination(PDO $db, int $pageActu=1, int $limit=5): array
 {
+    // pour touver l'offset (départ)
+    $offset = ($pageActu - 1) * PAGINATION_NB;
+    $limit = PAGINATION_NB;
+
+    // préparation de la requête
+    $sql = "SELECT * FROM `guestbook` ORDER BY `datemessage` DESC LIMIT :offset, :limit;";
+    $stmt = $db->prepare($sql);
+    // on passe les variables à lar requêtes, ! ils doivent passer au format integer !
+    $stmt->bindValue("offset",$offset,PDO::PARAM_INT);
+    $stmt->bindValue("limit",$limit,PDO::PARAM_INT);
+    $stmt->execute();
+    $return = $stmt->fetchAll();
+    $stmt->closeCursor();
+    return $return;
     // Requête préparée obligatoire !
     // Le $offset et le $limit sont des entiers, il faut donc les passer
     // en paramètres de la requête préparée en tant qu'entiers !
     // si la requête a réussi,
     // bonne pratique, fermez le curseur
     // renvoyer le tableau de(s) message(s) (vide si pas de résultats)
-    return [];
 }
 
 # Pour afficher la pagination dans la vue
@@ -203,19 +216,19 @@ function pagination(int $nbtotalMessage, string $url="./?", string $get="page", 
             } elseif ($pageActu === 2) {
                 $sortie .= " <a href='$url'><<</a> <a href='$url'><</a> <a href='$url'>1</a> |";
             } else {
-                $sortie .= " <a href='$url'><<</a> <a href='$url&$get=" . ($pageActu - 1) . "'><</a> <a href='$url'>1</a> |";
+                $sortie .= " <a href='$url'><<</a> <a href='$url?&$get=" . ($pageActu - 1) . "'><</a> <a href='$url'>1</a> |";
             }
         } elseif ($i < $nbPages) {
             if ($i === $pageActu) {
                 $sortie .= "  $i |";
             } else {
-                $sortie .= "  <a href='$url&$get=$i'>$i</a> |";
+                $sortie .= "  <a href='$url?&$get=$i'>$i</a> |";
             }
         } else {
             if ($pageActu >= $nbPages) {
                 $sortie .= "  $nbPages > >>";
             } else {
-                $sortie .= "  <a href='$url&$get=$nbPages'>$nbPages</a> <a href='$url&$get=" . ($pageActu + 1) . "'>></a> <a href='$url&$get=$nbPages'>>></a>";
+                $sortie .= "  <a href='$url?&$get=$nbPages'>$nbPages</a> <a href='$url?&$get=" . ($pageActu + 1) . "'>></a> <a href='$url?&$get=$nbPages'>>></a>";
             }
         }
     }
