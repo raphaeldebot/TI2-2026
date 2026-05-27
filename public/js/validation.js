@@ -164,7 +164,7 @@
         return regex.test(email);
     }
 
-    $form.on("submit", function (event) {
+    $form.on("keyup", function (event) {
         let isValid = true;
 
         const firstname = $("#firstname").val().trim();
@@ -181,20 +181,38 @@
         clearError("#phone", "#phoneError");
         clearError("#message", "#messageError");
 
-        if (firstname.length < 2) {
+        if (firstname.length <= 1) {
             showError("#firstname", "#firstnameError", "Le prenom doit contenir au moins 2 caractères.");
             isValid = false;
         } else if (firstname.length > 120) {
             showError("#firstname", "#firstnameError", "Le prenom ne peut pas dépasser 120 caractères.");
             isValid = false;
+        } else if (firstname.length >= 2){
+            $("#firstnameError").fadeIn(600, function(){
+                $("#firstnameError").removeClass("field-error");
+                $("#firstnameError").addClass("success")
+                $("#firstnameError").text("parfait")});
+        } else {
+            
+                $("#firstnameError").addClass("field-error");
+                $("#firstnameError").removeClass("success")
         }
 
-        if (lastname.length < 5) {
+        if (lastname.length <= 1) {
             showError("#lastname", "#lastnameError", "Le nom doit contenir au moins 2 caractères.");
             isValid = false;
         } else if (lastname.length > 120) {
             showError("#lastname", "#lastnameError", "Le nom  ne peut pas dépasser 120 caractères.");
             isValid = false;
+        }   else if (lastname.length >= 2){
+            $("#lastnameError").fadeIn(600, function(){
+                $("#lastnameError").removeClass("field-error");
+                $("#lastnameError").addClass("success")
+                $("#lastnameError").text("parfait")});
+        } else {
+            $("#lastnameError").fadeOut(600, function(){
+                $("#lastname").removeClass("field-error");
+                $("##lastname").removeClass("success")})
         }
 
         if (usermail === "") {
@@ -206,11 +224,29 @@
         } else if (usermail.length > 120) {
             showError("#usermail", "#usermailError", "L'email ne peut pas dépasser 120 caractères.");
             isValid = false;
-        }
+        } else if (usermail){
+            $("#usermailError").fadeIn(600, function(){
+                $("#usermailError").removeClass("field-error");
+                $("#usermailError").addClass("success")
+                $("#usermailError").text("parfait")});
+         } else {
+         
+                 $("#usermailError").addClass("field-error");
+               $("#usermailError").removeClass("success")
+         }
 
-        if (postcode.length == 4) {
-            showError("#postcode", "#postcode", "Le code postal doit contenir 4 caractères .");
+        if ((parseFloat(postcode) < 1000  )|| (parseFloat(postcode) > 9999  )) {
+            showError("#postcode", "#postcodeError", "Le code postal doit contenir 4 caractères et etre entre 1000 et 9999 .");
             isValid = false;
+        }else if (postcode.length != 4){
+ showError("#postcode", "#postcodeError", "Le code postal doit contenir 4 caractères et etre entre 1000 et 9999 .");
+            isValid = false;
+        }else  {
+            $("#postcodeError").removeClass("field-error");
+                $("#postcodeError").addClass("success")
+                $("#postcodeError").text("parfait");
+        }
+        
         // } else if (instpostcode < 1000 && instpostcode > 9000) {
         //     showError("#postcode", "#postcodeError", "Le code postal doit etre entre 1000 et 9000");
         //     isValid = false;
@@ -219,10 +255,11 @@
         if (phone.length != 10) {
             showError("#phone", "#phoneError", "Il y a 10 chiffres dans les numero belge");
             isValid = false;
-        // } else if (title.length > 180) {
-        //     showError("#title", "#titleError", "Le titre ne peut pas dépasser 180 caractères.");
-        //     isValid = false;
-        // }
+             } else  {
+            $("#phoneError").removeClass("field-error");
+                $("#phoneError").addClass("success")
+                $("#phoneError").text("parfait");
+        }
 
         if (message.length < 10) {
             showError("#message", "#messageError", "Le message doit contenir au moins 10 caractères.");
@@ -230,10 +267,14 @@
         } else if (message.length > 500) {
             showError("#message", "#messageError", "Le message ne peut pas dépasser 500 caractères.");
             isValid = false;
+        } else  {
+            $("#messageError").removeClass("field-error");
+                $("#messageError").addClass("success")
+                $("#messageError").text("parfait");
         }
 
          if (!isValid) {
              event.preventDefault();
          };
-    }}});
+    });
 });

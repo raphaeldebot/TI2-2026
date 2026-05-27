@@ -31,15 +31,17 @@
     </div>
 <!-- Formulaire d'ajout d'un message -->
 <form id="messageForm" class="form-card" method="POST" action="" novalidate>
+    
         <div class="form-group">
-            <label for="firstname">Prénom</label>
+            <label class="firstname" for="firstname">Prénom</label>
             <input 
                 type="texte" 
                 name="firstname" 
                 id="firstname" 
             >
-            <small class="field-error" id="firstnameError"></small>
+            
         </div>
+        <small class="field-error" id="firstnameError"></small>
 
         <div class="form-group">
             <label for="lastname">Nom</label>
@@ -48,9 +50,9 @@
                 name="lastname" 
                 id="lastname" 
             >
-            <small class="field-error" id="lastnameError"></small>
+            
         </div>
-
+        <small class="field-error" id="lastnameError"></small>
         <div class="form-group">
             <label for="usermail">É-mail</label>
             <input 
@@ -58,9 +60,9 @@
                 name="usermail" 
                 id="usermail"
             >
-            <small class="field-error" id="usermailError"></small>
+            
         </div>
-
+        <small class="field-error" id="usermailError"></small>
         <div class="form-group">
             <label for="postcode">Code Postal</label>
             <input
@@ -68,9 +70,9 @@
                 name="postcode" 
                 id="postcode"
             >
-            <small class="field-error" id="postcodeError"></small>
+            
         </div>
-
+        <small class="field-error" id="postcodeError"></small>
         <div class="form-group">
             <label for="phone">Télephone</label>
             <input
@@ -78,22 +80,27 @@
                 name="phone" 
                 id="phone"
             >
-            <small class="field-error" id="phoneError"></small>
+            
         </div>
-
+        <small class="field-error" id="phoneError"></small>
         <div class="form-group">
             <label for="message">Message</label>
             <textarea 
                 name="message" 
                 id="message"
             ></textarea>
-            <small class="field-error" id="messageError"></small>
+            
         </div>
-
+        <small class="field-error" id="messageError"></small>
+        <br>
         <button type="submit">Envoyer le message</button>
+        <br>
     </form>
 
-<?php if ($countMessages === 0): ?>
+
+<!-- Pagination (BONUS) -->
+<div class="message-container">
+    <?php if ($countMessages === 0): ?>
 
         <h3>Pas encore de commentaire</h3>
 
@@ -106,8 +113,6 @@
         <h3>Il y a <?= $countMessages ?> commentaires</h3>
 
     <?php endif; ?>
-<!-- Pagination (BONUS) -->
-
 <?php if (!empty($messages)): ?>
         <ul class="comments-list">
             <?php foreach ($messages as $message): ?>
@@ -129,9 +134,9 @@
             </li>
             <?php endforeach; ?>
             </ul>
-    <?php endif; ?>
-    <p class="pagination">
-<?php echo $pagination ?></p>
+    <?php endif; ?></div>
+    <div class="pagination">
+    <p><a href=""><?php echo $pagination ?></a></p></div>
 <script src="js/validation.js"></script>
 </body>
 </html>
