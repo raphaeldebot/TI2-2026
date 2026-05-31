@@ -18,14 +18,9 @@ body {
     padding: 20px;
 }
 
-
-
-
-
-
 /* LAYOUT GENERAL */
 
-header{
+header {
     margin: 0 auto;
     text-align: center;
     border-radius: 28px;
@@ -34,14 +29,12 @@ header{
     box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
 }
 
-
-
 img {
     width: 200px;
 }
 
-
 /* COMMENTAIRES */
+
 .success-message {
     max-width: 620px;
     margin: 0 auto 24px;
@@ -60,7 +53,6 @@ img {
 }
 
 .commentaire-card {
-   
     width: 100%;
     margin: 0 auto;
     padding: 24px;
@@ -76,9 +68,10 @@ img {
     color: #ffffff;
     font-size: 1.35rem;
 }
-.comment-name{
-    
+
+.comment-name {
 }
+
 .comment-meta {
     margin: 0 0 14px;
     color: #b7c8bd;
@@ -90,9 +83,8 @@ img {
     line-height: 1.6;
 }
 
-
-
 /* FORMULAIRE */
+
 .form-card {
     margin: 0 auto;
     padding: 30px;
@@ -112,7 +104,7 @@ img {
     margin-bottom: 18px;
 }
 
-.firstname{
+.firstname {
     position: relative;
 }
 
@@ -131,6 +123,7 @@ textarea {
     background: rgba(0, 0, 0, 0.38);
     color: #f5fff7;
     font: inherit;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 input:focus,
@@ -144,6 +137,42 @@ textarea {
     min-height: 150px;
     resize: vertical;
 }
+
+/* VALIDATION DES CHAMPS */
+
+input.input-error,
+textarea.input-error {
+    border-color: red;
+    box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.15);
+}
+
+input.input-success,
+textarea.input-success {
+    border-color: green;
+    box-shadow: 0 0 0 3px rgba(0, 128, 0, 0.15);
+}
+
+input.input-error:focus,
+textarea.input-error:focus {
+    border-color: red;
+    box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.25);
+}
+
+input.input-success:focus,
+textarea.input-success:focus {
+    border-color: green;
+    box-shadow: 0 0 0 3px rgba(0, 128, 0, 0.25);
+}
+
+.field-error {
+    color: red;
+}
+
+.success {
+    color: green;
+}
+
+/* BOUTONS */
 
 .button-link,
 button {
@@ -163,96 +192,92 @@ button:hover {
     background: rgba(0, 255, 60, 0.25);
 }
 
-.field-error{
-    
-    color: red;
-}
+/* LISTES ET PAGINATION */
 
 ul {
     list-style: none;
     padding: 0;
 }
 
-.pagination a{
+.pagination a {
     list-style: none;
     text-decoration: none;
     color: green;
 }
 
-.success{
-    color: green;
-}
+/* RESPONSIVE TABLETTE */
 
-/* RESPONSIVE */
 @media screen and (480px < width < 960px) {
-    .form-group{
+    .form-group {
         display: flex;
         justify-content: flex-end;
         align-items: center;
     }
 
-    .form-group input, .form-group textarea{
+    .form-group input,
+    .form-group textarea {
         width: 80%;
         margin-left: 10px;
     }
-} 
+}
+
+/* RESPONSIVE DESKTOP */
 
 @media screen and (width > 960px) {
-    body{
+    body {
         margin: 0 auto;
         width: 80%;
         display: grid;
         grid-template-columns: 2fr 3fr;
         grid-template-rows: 100px 180px 1fr 1fr;
-        grid-template-areas: 
-        "h h"
-        "i m"
-        "f m"
-        "f m"
-        "f p";
+        grid-template-areas:
+            "h h"
+            "i m"
+            "f m"
+            "f m"
+            "f p";
         column-gap: 30px;
         row-gap: 10px;
     }
-    div img{
+
+    div img {
         width: 140px;
         grid-area: i;
     }
 
-    
-
-    header{
+    header {
         grid-area: h;
         width: 100%;
         padding: 10px;
     }
 
-
-    header h1, header p{
+    header h1,
+    header p {
         margin: 0;
         line-height: 40px;
     }
 
-    form{
+    form {
         grid-area: f;
-    }
-    .comments-list{
-        grid-area: m;
-    }
-
-    .pagination{
-        grid-area: p;
-    }
-    form{
         width: 100%;
     }
 
-    .form-group{
+    .comments-list {
+        grid-area: m;
+    }
+
+    .pagination {
+        grid-area: p;
+    }
+
+    .form-group {
         display: flex;
         justify-content: flex-end;
         align-items: center;
     }
 
-    .form-group input, .form-group textarea{
+    .form-group input,
+    .form-group textarea {
         width: 80%;
         margin-left: 10px;
     }

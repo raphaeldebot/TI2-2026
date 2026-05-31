@@ -174,12 +174,7 @@
         const phone = $("#phone").val().trim();
         const message = $("#message").val().trim();
 
-        clearError("#firstname", "#firstnameError");
-        clearError("#lastname", "#lastnameError");
-        clearError("#usermail", "#usermailError");
-        clearError("#postcode", "#postcodeError");
-        clearError("#phone", "#phoneError");
-        clearError("#message", "#messageError");
+        
 
         if (firstname.length <= 1) {
             showError("#firstname", "#firstnameError", "Le prenom doit contenir au moins 2 caractères.");
@@ -277,4 +272,168 @@
              event.preventDefault();
          };
     });
+});
+
+
+$(function () {
+    // On met le form dans une const
+    const $form = $("#messageForm");
+
+    // on met les champs dans des const
+    const $firstname = $("#firstname")
+    const $lastname = $("#lastname")
+    const $usermail = $("#usermail")
+    const $postcode = $("#postcode")
+    const $phone = $("#phone")
+    const $message = $("#message")
+
+    // on met les valeur des champ dans des const
+    const firstnameVal = $("#firstname").val().trim();
+    const lastnameVal = $("#lastname").val().trim();
+    const usermailVal = $("#usermail").val().trim();
+    const postcodeVal = $("#postcode").val().trim();
+    const phoneVal = $("#phone").val().trim();
+    const messageVal = $("#message").val().trim();
+
+    // on met les champ d'erreur dans des const
+    const $firstnameE = $("#firstnameError");
+    const $lastnameE = $("#lastnameError");
+    const $usermailE = $("#usermailError");
+    const $postcodeE = $("#postcodeError");
+    const $phoneE = $("#phoneError");
+    const $messageE = $("#messageError");
+
+    // on créer notre fonction réutilisable pour afficher les erreur
+    function showError($input, $error, message) {
+    
+    $input
+        .removeClass("input-success")
+        .addClass("input-error");
+
+    $error
+        .stop(true, true)
+        .removeClass("success")
+        .addClass("field-error")
+        .hide()
+        .text(message)
+        .slideDown(200);
+    }
+
+    // on créer notre fonction réutilisable pour afficher les success
+    function showSuccess($input, $error, message) {
+
+        $input
+            .removeClass("input-error")
+            .addClass("input-success");
+
+        $error
+            .stop(true, true)
+            .removeClass("field-error")
+            .addClass("success")
+            .text(message)
+            .fadeIn(200);
+    }
+
+    // fonction pour valider le prénom
+    function validateFirstname(){
+
+        const firstnameVal = $firstname.val().trim();
+
+        if (firstnameVal.length < 2) {
+            showError($firstname, $firstnameE, "Le prenom doit contenir au moins 2 caractères.");
+            return false;
+        } else if (firstnameVal.length > 120) {
+            showError($firstname, $firstnameE, "Le prenom ne peut pas dépasser 120 caractères.");
+            return false;
+        } else {
+            showSuccess($firstname, $firstnameE, "Parfait");
+            return true;
+        }
+    }
+
+    // validation en temps réel du prénom
+    $firstname.on("input",function(){
+
+        validateFirstname();
+
+    });
+    
+    // validation au submit du prénom
+    $form.on("submit", function(event){
+
+        const isValidFirstname = validateFirstname();
+
+        if (!isValidFirstname){
+            event.preventDefault();
+        }
+    })
+
+    // fonction pour valider le prénom
+    function validateLastname(){
+
+        const lastnameVal = $lastname.val().trim();
+
+        if (lastnameVal.length <= 1) {
+            showError($lastname, $lastnameE, "Le nom doit contenir au moins 2 caractères.");
+            return false;
+        } else if (lastnameVal.length > 120) {
+            showError($lastname, $lastnameE, "Le nom ne peut pas dépasser 120 caractères.");
+            return false;
+        } else {
+            showSuccess($lastname, $lastnameE, "Parfait");
+            return true;
+        }
+    }
+
+    // validation en temps réel du prénom
+    $lastname.on("input",function(){
+
+        validateLastname();
+
+    });
+    
+    // validation au submit du prénom
+    $form.on("submit", function(event){
+
+        const isValidLastname = validateLastname();
+
+        if (!isValidLastname){
+            event.preventDefault();
+        }
+    })
+
+    function validateLastname(){
+
+        const lastnameVal = $lastname.val().trim();
+
+        if (lastnameVal.length <= 1) {
+            showError($lastname, $lastnameE, "Le nom doit contenir au moins 2 caractères.");
+            return false;
+        } else if (lastnameVal.length > 120) {
+            showError($lastname, $lastnameE, "Le nom ne peut pas dépasser 120 caractères.");
+            return false;
+        } else {
+            showSuccess($lastname, $lastnameE, "Parfait");
+            return true;
+        }
+    }
+
+    // validation en temps réel du prénom
+    $lastname.on("input",function(){
+
+        validateLastname();
+
+    });
+    
+    // validation au submit du prénom
+    $form.on("submit", function(event){
+
+        const isValidLastname = validateLastname();
+
+        if (!isValidLastname){
+            event.preventDefault();
+        }
+    })
+
+    
 });
