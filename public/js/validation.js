@@ -142,137 +142,11 @@
    ========================================================================= */
 
 
-   $(function () {
-    const $form = $("#messageForm");
 
-    if ($form.length === 0) {
-        return;
-    }
-
-    function showError(inputSelector, errorSelector, message) {
-        $(inputSelector).addClass("input-error");
-        $(errorSelector).text(message);
-    }
-
-    function clearError(inputSelector, errorSelector) {
-        $(inputSelector).removeClass("input-error");
-        $(errorSelector).text("");
-    }
-
-    function isValidEmail(email) {
-        const regex = /^[a-zA-Z]+\@[a-zA-Z]+\.[a-zA-Z{2,}]+$/;
-        return regex.test(email);
-    }
-
-    $form.on("keyup", function (event) {
-        let isValid = true;
-
-        const firstname = $("#firstname").val().trim();
-        const lastname = $("#lastname").val().trim();
-        const usermail = $("#usermail").val().trim();
-        const postcode = $("#postcode").val().trim();
-        const phone = $("#phone").val().trim();
-        const message = $("#message").val().trim();
-
-        
-
-        if (firstname.length <= 1) {
-            showError("#firstname", "#firstnameError", "Le prenom doit contenir au moins 2 caractères.");
-            isValid = false;
-        } else if (firstname.length > 120) {
-            showError("#firstname", "#firstnameError", "Le prenom ne peut pas dépasser 120 caractères.");
-            isValid = false;
-        } else if (firstname.length >= 2){
-            $("#firstnameError").fadeIn(600, function(){
-                $("#firstnameError").removeClass("field-error");
-                $("#firstnameError").addClass("success")
-                $("#firstnameError").text("parfait")});
-        } else {
-            
-                $("#firstnameError").addClass("field-error");
-                $("#firstnameError").removeClass("success")
-        }
-
-        if (lastname.length <= 1) {
-            showError("#lastname", "#lastnameError", "Le nom doit contenir au moins 2 caractères.");
-            isValid = false;
-        } else if (lastname.length > 120) {
-            showError("#lastname", "#lastnameError", "Le nom  ne peut pas dépasser 120 caractères.");
-            isValid = false;
-        }   else if (lastname.length >= 2){
-            $("#lastnameError").fadeIn(600, function(){
-                $("#lastnameError").removeClass("field-error");
-                $("#lastnameError").addClass("success")
-                $("#lastnameError").text("parfait")});
-        } else {
-            $("#lastnameError").fadeOut(600, function(){
-                $("#lastname").removeClass("field-error");
-                $("##lastname").removeClass("success")})
-        }
-
-        if (usermail === "") {
-            showError("#usermail", "#usermailError", "L'email est obligatoire.");
-            isValid = false;
-        } else if (!isValidEmail(usermail)) {
-            showError("#usermail", "#usermailError", "L'email n'est pas valide.");
-            isValid = false;
-        } else if (usermail.length > 120) {
-            showError("#usermail", "#usermailError", "L'email ne peut pas dépasser 120 caractères.");
-            isValid = false;
-        } else if (usermail){
-            $("#usermailError").fadeIn(600, function(){
-                $("#usermailError").removeClass("field-error");
-                $("#usermailError").addClass("success")
-                $("#usermailError").text("parfait")});
-         } else {
-         
-                 $("#usermailError").addClass("field-error");
-               $("#usermailError").removeClass("success")
-         }
-
-        if ((parseFloat(postcode) < 1000  )|| (parseFloat(postcode) > 9999  )) {
-            showError("#postcode", "#postcodeError", "Le code postal doit contenir 4 caractères et etre entre 1000 et 9999 .");
-            isValid = false;
-        }else if (postcode.length != 4){
- showError("#postcode", "#postcodeError", "Le code postal doit contenir 4 caractères et etre entre 1000 et 9999 .");
-            isValid = false;
-        }else  {
-            $("#postcodeError").removeClass("field-error");
-                $("#postcodeError").addClass("success")
-                $("#postcodeError").text("parfait");
-        }
-        
-        // } else if (instpostcode < 1000 && instpostcode > 9000) {
-        //     showError("#postcode", "#postcodeError", "Le code postal doit etre entre 1000 et 9000");
-        //     isValid = false;
-        // }
-
-        if (phone.length != 10) {
-            showError("#phone", "#phoneError", "Il y a 10 chiffres dans les numero belge");
-            isValid = false;
-             } else  {
-            $("#phoneError").removeClass("field-error");
-                $("#phoneError").addClass("success")
-                $("#phoneError").text("parfait");
-        }
-
-        if (message.length < 10) {
-            showError("#message", "#messageError", "Le message doit contenir au moins 10 caractères.");
-            isValid = false;
-        } else if (message.length > 500) {
-            showError("#message", "#messageError", "Le message ne peut pas dépasser 500 caractères.");
-            isValid = false;
-        } else  {
-            $("#messageError").removeClass("field-error");
-                $("#messageError").addClass("success")
-                $("#messageError").text("parfait");
-        }
-
-         if (!isValid) {
-             event.preventDefault();
-         };
-    });
-});
+// Regex
+  const regexEmail = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,6}$/;
+  const regexPostcode = /^\d{4}$/;
+  const regexPhone = /^(\+32|0032|0)4\d{8}$/;
 
 
 $(function () {
@@ -402,38 +276,166 @@ $(function () {
         }
     })
 
-    function validateLastname(){
+    // fonction pour la validation regex du mail
+    function regexValidationUsermail(email) {
+            const regexUsermail = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,6}$/;
+            return regexUsermail.test(email);
+        }
+    // fonction pour validé l'email
+    function validateUsermail(){
+        const usermailVal = $usermail.val().trim();
 
-        const lastnameVal = $lastname.val().trim();
+        
 
-        if (lastnameVal.length <= 1) {
-            showError($lastname, $lastnameE, "Le nom doit contenir au moins 2 caractères.");
+        if (usermailVal === "") {
+            showError($usermail, $usermailE, "L'email est obligatoire.");
             return false;
-        } else if (lastnameVal.length > 120) {
-            showError($lastname, $lastnameE, "Le nom ne peut pas dépasser 120 caractères.");
+        } else if (!regexValidationUsermail(usermailVal)){
+            showError($usermail, $usermailE, "L'email n'est pas valide.");
+            return false;
+        } else if (usermailVal.length > 120) {
+            showError($usermail, $usermailE, "L'émail ne peut pas dépasser 120 caractères.");
             return false;
         } else {
-            showSuccess($lastname, $lastnameE, "Parfait");
+            showSuccess($usermail, $usermailE, "Parfait");
+            return true;
+        }
+    }
+
+    // validation en temps réel du mail
+    $usermail.on("input",function(){
+
+        validateUsermail();
+
+    });
+    
+    // validation au submit du mail
+    $form.on("submit", function(event){
+
+        const isValidUsermail = validateUsermail();
+
+        if (!isValidUsermail){
+            event.preventDefault();
+        }
+    })
+
+
+    // fonction pour la validation regex du code postal
+    function regexValidationPostcode(postcode) {
+
+            const regexPostcode = /^\d{4}$/;
+
+            return regexPostcode.test(postcode);
+
+        }
+    // fonction pour validé le code postal
+    function validatePostcode(){
+
+        const postcodeVal = $postcode.val().trim();
+
+        if (postcodeVal === "") {
+            showError($postcode, $postcodeE, "Le code postal est obligatoire.");
+            return false;
+        } else if (!regexValidationPostcode(postcodeVal)){
+            showError($postcode, $postcodeE, "Le code postal doit etre un nombre entre 1000 et 9999");
+            return false;
+        } else {
+            showSuccess($postcode, $postcodeE, "Parfait");
+            return true;
+        }
+    }
+
+    // validation en temps réel du code postal
+    $postcode.on("input",function(){
+
+        validatePostcode();
+
+    });
+    
+    // validation au submit du code postal
+    $form.on("submit", function(event){
+
+        const isValidPostcode = validatePostcode();
+
+        if (!isValidPostcode){
+            event.preventDefault();
+        }
+    })
+
+    // fonction pour la validation regex du numéro de telephone
+    function regexValidationPhone(phone) {
+
+            const regexPhone = /^(\+32|0032|0)4\d{8}$/;
+
+            return regexPhone.test(phone);
+            
+        }
+    // fonction pour validé le numéro de télephone
+    function validatePhone(){
+
+        const phoneVal = $phone.val().trim();
+
+        if (phoneVal === "") {
+            showError($phone, $phoneE, "Le numéro de téléphone est obligatoire.");
+            return false;
+        } else if (!regexValidationPhone(phoneVal)){
+            showError($phone, $phoneE, "Le numéro de téléphone n'est pas valide");
+            return false;
+        } else {
+            showSuccess($phone, $phoneE, "Parfait");
+            return true;
+        }
+    }
+
+    // validation en temps réel du numéro de telephone
+    $phone.on("input",function(){
+
+        validatePhone();
+
+    });
+    
+    // validation au submit du numéro de téléphone
+    $form.on("submit", function(event){
+
+        const isValidPhone = validatePhone();
+
+        if (!isValidPhone){
+            event.preventDefault();
+        }
+    })
+
+    // fonction pour valider le message
+    function validateMessage(){
+
+        const messageVal = $message.val().trim();
+
+        if (messageVal.length < 10) {
+            showError($message, $messageE, "Le message doit contenir au moins 10 caractères.");
+            return false;
+        } else if (messageVal.length > 500) {
+            showError($message, $messageE, "Le prenom ne peut pas dépasser 500 caractères.");
+            return false;
+        } else {
+            showSuccess($message, $messageE, "Parfait");
             return true;
         }
     }
 
     // validation en temps réel du prénom
-    $lastname.on("input",function(){
+    $message.on("input",function(){
 
-        validateLastname();
+        validateMessage();
 
     });
     
     // validation au submit du prénom
     $form.on("submit", function(event){
 
-        const isValidLastname = validateLastname();
+        const isValidMessage = validateMessage();
 
-        if (!isValidLastname){
+        if (!isValidMessage){
             event.preventDefault();
         }
     })
 
-    
 });

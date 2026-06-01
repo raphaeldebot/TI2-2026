@@ -49,20 +49,22 @@ function addGuestbook(PDO $db,
     // vérification nom
     empty($lastname)                    ||
     strlen($lastname)       >   100     ||
-    // vérification numéro de téléphone
-    empty($phone)                       ||
-    strlen($phone)          !==  10     ||
-    // vérification code postal
-    empty($postcode)                    ||
-    strlen($postcode)       !==  4      ||
     // vérification message
     empty($message)                     ||
     strlen($message)        <   5       ||
     strlen($message)        >   500
 
-
+     
     ) return false;
 
+    
+    // Validation code postal belge : 4 chiffres entre 1000 et 9999
+        if (!preg_match('/^\d{4}$/', $postcode)) return false;
+        $postcodeInt = (int)$postcode;
+        if ($postcodeInt < 1000 || $postcodeInt > 9999) return false;
+    
+        // Validation du numéro de téléphone : +32 || 0032 || 04
+        if (!preg_match('/^(\+32|0032|0)4\d{8}$/', $phone)) return false;
 
     // requête préparée obligatoire !
 
