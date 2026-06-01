@@ -40,7 +40,8 @@ try{
  */
 
 $addGuestbook = false;
-if(isset($_POST['firstname'],$_POST['lastname'],$_POST['usermail'],$_POST['phone'],$_POST['postcode'],$_POST['message'])){
+if(isset($_POST['firstname'],$_POST['lastname'],$_POST['usermail'],$_POST['phone'],$_POST['postcode'],$_POST['message'],
+        $_POST['accord'])){
 // on appelle la fonction d'insertion dans la DB (addGuestbook())
     $addGuestbook=addGuestbook($connectDB,$_POST['firstname'],$_POST['lastname'],$_POST['usermail'],$_POST['phone'],$_POST['postcode'],$_POST['message']);
 

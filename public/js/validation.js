@@ -160,6 +160,10 @@ $(function () {
     const $postcode = $("#postcode")
     const $phone = $("#phone")
     const $message = $("#message")
+    const $accord = $("#case");
+    const $accordE = $("#accordError");
+    const $messageCounter = $("#messageCounter");
+    const maxMessageLength = 300;
 
     // on met les valeur des champ dans des const
     const firstnameVal = $("#firstname").val().trim();
@@ -424,9 +428,14 @@ $(function () {
     // validation en temps réel du prénom
     $message.on("input",function(){
 
+        updateMessageCounter();
+
+
         validateMessage();
 
     });
+
+    updateMessageCounter();
     
     // validation au submit du prénom
     $form.on("submit", function(event){
@@ -438,4 +447,89 @@ $(function () {
         }
     })
 
+    function validateAccord() {
+    if (!$accord.is(":checked")) {
+        $accordE
+            .stop(true, true)
+            .removeClass("success")
+            .addClass("field-error")
+            .hide()
+            .text("Vous devez accepter le stockage de vos données.")
+            .slideDown(200);
+
+        return false;
+    } else {
+        $accordE
+            .stop(true, true)
+            .removeClass("field-error")
+            .addClass("success")
+            .text("Parfait")
+            .fadeIn(200);
+
+        return true;
+    }
+    }
+
+    $accord.on("change", function () {
+    validateAccord();
+    });
+
+    $form.on("submit", function(event) {
+    const isValidAccord = validateAccord();
+
+    if (!isValidAccord) {
+        event.preventDefault();
+    }
+    });
+
+    function updateMessageCounter() {
+    const messageLength = $message.val().length;
+
+    $messageCounter.text(messageLength + " / " + maxMessageLength + " caractères");
+
+    if (messageLength >= 280) {
+        $messageCounter.addClass("counter-warning");
+    } else {
+        $messageCounter.removeClass("counter-warning");
+    }
+    }
+
+    const themes = {
+    green: "img/waifbook.png",
+    red: "img/waifbook-red.png",
+    gold: "img/waifbook-gold.png",
+    blue: "img/waifbook-blue.png",
+    purple: "img/waifbook-purple.png"
+    };
+
+    function changeTheme(themeName) {
+    const newImage = themes[themeName];
+    const $image = $("#themeImage");
+
+    $("body")
+        .removeClass("theme-green theme-red theme-gold theme-blue theme-purple")
+        .addClass("theme-" + themeName);
+
+    $(".theme-btn").removeClass("active");
+    $('.theme-btn[data-theme="' + themeName + '"]').addClass("active");
+
+    localStorage.setItem("selectedTheme", themeName);
+
+    if ($image.attr("src") === newImage) {
+        return;
+    }
+
+    $image.stop(true, true).fadeOut(250, function () {
+        $image.attr("src", newImage);
+        $image.fadeIn(300);
+    });
+}
+
+    const savedTheme = localStorage.getItem("selectedTheme") || "green";
+    changeTheme(savedTheme);
+
+    $(".theme-btn").on("click", function () {
+        const themeName = $(this).data("theme");
+        changeTheme(themeName);
+    });
 });
